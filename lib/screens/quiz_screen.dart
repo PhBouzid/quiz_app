@@ -9,16 +9,13 @@ void main() {
 }
 
 class Quiz extends StatefulWidget {
-  const Quiz({Key? key}) : super(key: key);
+  const Quiz({super.key});
   @override
   State<Quiz> createState() => _QuizState();
 }
 
 class _QuizState extends State<Quiz> {
-
   Widget screen = const StartScreen();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +23,18 @@ class _QuizState extends State<Quiz> {
       appBar: AppBar(
         title: const Text("Quiz App"),
       ),
-      backgroundColor: Gradient(colors: [
-        Colors.purple,
-        Colors.indigo,
-      ])
-      body: const Center(
-        child: Text("Hello World!"),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 78, 13, 151),
+              Color.fromARGB(255, 107, 15, 168),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: const StartScreen(),
       ),
     );
   }
