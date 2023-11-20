@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/screens/question_screen.dart';
 import 'package:quiz_app/screens/start_screen.dart';
+import 'package:quiz_app/widgets/background.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    title: "quiz app",
-    home: Quiz(),
-  ));
-}
+void main() {}
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -15,26 +12,34 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget screen = const StartScreen();
+  var activeScreen = 1;
+  BoxDecoration background = Background().decorate();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void switchScreen() {
+    setState(() {
+      activeScreen = 2;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    Widget screen = StartScreen(switchScreen);
+    if (activeScreen == 2) {
+      screen = const QuestionScreen();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Quiz App"),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 78, 13, 151),
-              Color.fromARGB(255, 107, 15, 168),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: const StartScreen(),
+        decoration: background,
+        child: screen,
       ),
     );
   }
