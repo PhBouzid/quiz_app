@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/quiz_data.dart';
 import 'package:quiz_app/screens/question_screen.dart';
+import 'package:quiz_app/screens/results.dart';
 import 'package:quiz_app/screens/start_screen.dart';
 import 'package:quiz_app/widgets/background.dart';
 
@@ -12,6 +14,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  List<String> selectedAnswers = [];
   var activeScreen = 1;
   BoxDecoration background = Background().decorate();
 
@@ -26,17 +29,26 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        //selectedAnswers = [];
+        activeScreen = 3;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget screen = StartScreen(switchScreen);
     if (activeScreen == 2) {
-      screen = const QuestionScreen();
+      screen = QuestionScreen(onSelectAnswer: chooseAnswer);
+    } else if (activeScreen == 3) {
+      screen = ResultScreen(chosenAnswers: selectedAnswers);
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Quiz App"),
-      ),
       body: Container(
         decoration: background,
         child: screen,
