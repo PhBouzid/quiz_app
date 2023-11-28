@@ -1,7 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_app/widgets/results_widgets/question_row.dart';
 
 class QuestionsSummary extends StatelessWidget {
   const QuestionsSummary(this.summaryData, {super.key});
@@ -12,34 +10,17 @@ class QuestionsSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 300,
-      child: SingleChildScrollView(
-        child: Column(
-          children: summaryData.map((item) {
-            return Row(
-              children: [
-                Text(((item['question_index'] as int) + 1).toString()),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(item['question'] as String),
-                      const SizedBox(
-                        height: 0.5,
-                      ),
-                      Text(item['chosen_answer'] as String),
-                      const SizedBox(
-                        height: 0.5,
-                      ),
-                      Text(item['correct_answer'] as String),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 3,
-                )
-              ],
-            );
-          }).toList(),
-        ),
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: summaryData.map((item) {
+                return QuestionRow(questionData: item);
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

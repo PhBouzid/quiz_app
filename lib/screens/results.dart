@@ -15,6 +15,7 @@ class ResultScreen extends StatelessWidget {
         'question': questions[i].question,
         'correct_answer': questions[i].answers[0],
         'chosen_answer': chosenAnswers[i],
+        'is_correct': questions[i].answers[0] == chosenAnswers[i],
       });
     }
     return summuryData;
@@ -31,7 +32,7 @@ class ResultScreen extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(40),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const Text("You have finished the quiz!"),
             Text("Here is your score: $score/$total"),
@@ -43,7 +44,11 @@ class ResultScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            TextButton(onPressed: () {}, child: Text("Try again")),
+            TextButton.icon(
+              onPressed: () {},
+              label: const Text("Try again"),
+              icon: const Icon(Icons.refresh),
+            ),
           ],
         ),
       ),

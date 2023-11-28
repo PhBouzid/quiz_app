@@ -5,8 +5,6 @@ import 'package:quiz_app/screens/results.dart';
 import 'package:quiz_app/screens/start_screen.dart';
 import 'package:quiz_app/widgets/background.dart';
 
-void main() {}
-
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
   @override
