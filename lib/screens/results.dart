@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/quiz_data.dart';
 import 'package:quiz_app/widgets/questions_summary.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key, required this.chosenAnswers});
+  const ResultScreen(
+      {super.key, required this.chosenAnswers, required this.onRestartQuiz});
 
   final List<String> chosenAnswers;
+  final void Function() onRestartQuiz;
 
   List<Map<String, Object>> getSummuryData() {
     final List<Map<String, Object>> summuryData = [];
@@ -29,23 +32,54 @@ class ResultScreen extends StatelessWidget {
         .length;
     final total = questions.length;
     return SizedBox(
+      width: double.infinity,
       child: Container(
         margin: const EdgeInsets.all(40),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("You have finished the quiz!"),
-            Text("Here is your score: $score/$total"),
+            Text(
+              "You have finished the quiz!",
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Text(
+              "Here is your score: $score/$total",
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             QuestionsSummary(getSummuryData()),
-            const Text("You can do better!"),
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              "You can do better!",
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),
             TextButton.icon(
-              onPressed: () {},
+              onPressed: onRestartQuiz,
               label: const Text("Try again"),
               icon: const Icon(Icons.refresh),
             ),

@@ -15,7 +15,7 @@ class QuestionIndex extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: isCorrectAnswer ? Colors.green : Colors.red,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(100),
       ),
       child: Text(
         (questionIndex + 1).toString(),

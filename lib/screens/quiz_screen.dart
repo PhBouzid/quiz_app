@@ -21,13 +21,13 @@ class _QuizState extends State<Quiz> {
     super.initState();
   }
 
-  void switchScreen() {
+  void _switchScreen() {
     setState(() {
       activeScreen = 2;
     });
   }
 
-  void chooseAnswer(String answer) {
+  void _chooseAnswer(String answer) {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
       setState(() {
@@ -37,13 +37,21 @@ class _QuizState extends State<Quiz> {
     }
   }
 
+  void _restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 2;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget screen = StartScreen(switchScreen);
+    Widget screen = StartScreen(_switchScreen);
     if (activeScreen == 2) {
-      screen = QuestionScreen(onSelectAnswer: chooseAnswer);
+      screen = QuestionScreen(onSelectAnswer: _chooseAnswer);
     } else if (activeScreen == 3) {
-      screen = ResultScreen(chosenAnswers: selectedAnswers);
+      screen = ResultScreen(
+          chosenAnswers: selectedAnswers, onRestartQuiz: _restartQuiz);
     }
 
     return Scaffold(

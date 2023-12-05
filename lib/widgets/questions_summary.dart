@@ -9,18 +9,13 @@ class QuestionsSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
-      child: Column(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: summaryData.map((item) {
-                return QuestionRow(questionData: item);
-              }).toList(),
-            ),
-          ),
-        ],
+      height: 400,
+      child: SingleChildScrollView(
+        child: Column(
+          children: summaryData.map((item) {
+            return QuestionRow(questionData: item);
+          }).toList(),
+        ),
       ),
     );
   }

@@ -15,7 +15,7 @@ class QuestionStyle extends StatelessWidget {
       style: GoogleFonts.lato(
         textStyle: const TextStyle(
           color: Color.fromARGB(255, 229, 229, 226),
-          fontSize: 24,
+          fontSize: 14,
           fontWeight: FontWeight.bold,
         ),
       ),

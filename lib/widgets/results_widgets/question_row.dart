@@ -11,48 +11,53 @@ class QuestionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isCorrectAnswer = questionData['is_correct'] as bool;
-    return Row(
-      children: [
-        QuestionIndex(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          QuestionIndex(
             questionIndex: (questionData['question_index'] as int),
-            isCorrectAnswer: (questionData['is_correct'] as bool)),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              QuestionStyle(
-                  question: questionData['question'] as String,
-                  isCorrectAnswer: (questionData['is_correct'] as bool)),
-              const SizedBox(
-                height: 0.5,
-              ),
-              Text(questionData['chosen_answer'] as String,
+            isCorrectAnswer: (questionData['is_correct'] as bool),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                QuestionStyle(
+                    question: questionData['question'] as String,
+                    isCorrectAnswer: (questionData['is_correct'] as bool)),
+                Text(questionData['chosen_answer'] as String,
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        color: isCorrectAnswer ? Colors.green : Colors.red,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    textAlign: TextAlign.left),
+                const SizedBox(
+                  height: 1,
+                ),
+                Text(
+                  questionData['correct_answer'] as String,
                   style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      color: isCorrectAnswer ? Colors.green : Colors.red,
+                    textStyle: const TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  textAlign: TextAlign.left),
-              const SizedBox(
-                height: 1,
-              ),
-              Text(
-                questionData['correct_answer'] as String,
-                style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  textAlign: TextAlign.left,
                 ),
-                textAlign: TextAlign.left,
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
